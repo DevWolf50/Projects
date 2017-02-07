@@ -1,0 +1,17 @@
+{
+  "name": "ydkjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "chap1Proj.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-react": "^6.9.0",
+  },
+  "dependencies": {}
+}
