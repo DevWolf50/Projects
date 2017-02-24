@@ -3,7 +3,7 @@
  *
  * Helper functions for Problem Set 3.
  */
- 
+
 #include <cs50.h>
 #include <stdio.h>
 
@@ -14,16 +14,16 @@
  */
 bool search(int value, int values[], int n)
 {
-    // linear searching: starts at the begining and compares one index at a time to the value  
-    
+    // linear searching: starts at the begining and compares one index at a time to the value
+
     if ( n < 0) {
         return false;
-    } 
-    
+    }
+
     for ( int i = 0; i < n; i++ )  {
         if( value == values[i] ) {
             return true;
-        } 
+        }
     }
     return false;
 }
@@ -33,29 +33,31 @@ bool search(int value, int values[], int n)
  */
 void sort(int values[], int n)
 {
-    // TODO: implement an O(n^2) sorting algorithm
-    
-    int swaps = 1;
-    int t = 0;
-    while ( swaps > 0 ) {
-        swaps = 0;
-        for ( int i = 0; i < n - 1 - t; i ++ )  {
-            if ( values[i] > values[i + 1] ) {
-                int temp = values[i];
-                values[i] = values[i + 1];
-                values[i + 1] = temp;
-                swaps++;
-            }
-            
-        }
-        t++;
-        for(int i = 0; i < n; i++) {
-            printf("%i", values[i]);
-        }
-        printf("\n");
-    }
-    
-    return;
+  //run through the array
+     for ( int i = 0; i < n; i ++) {
+
+         //keep track of swaps
+         bool swap = false;
+
+         //run through the array minus the number of spots you dont need to look at anymore(i)
+         for (int j = 0; j < n - 1 - i; j++) {
+
+             //bubble sort and track if there was a swap performed
+             if (values[j] > values[j + 1] ) {
+
+                 int temp = values[j];
+                 values[j] = values[j + 1];
+                 values[j + 1] = temp;
+
+                 swap = true;
+             }
+         }
+
+         //if there was no swaps then get out of loop
+         if( !swap ) {
+             return;
+         }
+     }
+
+     return;
 }
-
-
