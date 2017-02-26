@@ -14,41 +14,38 @@
  */
 bool search(int value, int values[], int n)
 {
-    // linear searching: starts at the begining and compares one index at a time to the value  O(n)
-    // TODO: refactor algorithm to have a run time of O(log n)
 
-    if ( n < 0) {
-        return false;
-    }
+  //check for error
+  if ( n < 0) {
+  return false;
+  }
 
-    int length = n;
-    int right = n - 1;
-    while (length > 0) {
-        length = length/2;
-        int middle = right - length;
+  // Binary search:  O(log n)
 
-        if( value == values[ middle]) {
-            return true;
-        } else if (value < values[ middle ]) {
-            right = middle;
-            length++;
-        }
-    }
+  //store the length of the values array, store the start of the array, store the end of the array
+  int aLength = n;
+  int left = 0;
+  int right = n - 1;
 
-    //check the middle of the array
-    //is the needle that number
-    //is the needle less than or greater than the number?
-    //if its greater than check the right half
-    //if its less than check the left half
-    //repeat
-    /**
-    for ( int i = 0; i < n; i++ )  {
-        if( value == values[i] ) {
-            return true;
-        }
-    }
-    */
-    return false;
+  //keep splitting the array in half and checking the middle of the array to see if it matches the value
+  while ( aLength > 0 ) {
+      int half = aLength / 2;
+      int middle = right - half;
+
+      if( value == values[middle] ) {
+          //success
+          return true;
+      } else if ( value < values[middle] ) {
+          right = middle - 1;
+      } else {
+          left = middle + 1;
+      }
+
+      //reset the current array length
+      aLength = right - left + 1;
+  }
+  //failure
+  return false;
 }
 
 /**
@@ -56,31 +53,31 @@ bool search(int value, int values[], int n)
  */
 void sort(int values[], int n)
 {
-    //run through the array
-    for ( int i = 0; i < n; i ++) {
+  //run through the array
+  for ( int i = 0; i < n; i ++) {
 
-        //keep track of swaps
-        bool swap = false;
+      //keep track of swaps
+      bool swap = false;
 
-        //run through the array minus the number of spots you dont need to look at anymore(i)
-        for (int j = 0; j < n - 1 - i; j++) {
+      //run through the array minus the number of spots you dont need to look at anymore(i)
+      for (int j = 0; j < n - 1 - i; j++) {
 
-            //bubble sort and track if there was a swap performed
-            if (values[j] > values[j + 1] ) {
+          //bubble sort and track if there was a swap performed
+          if (values[j] > values[j + 1] ) {
 
-                int temp = values[j];
-                values[j] = values[j + 1];
-                values[j + 1] = temp;
+              int temp = values[j];
+              values[j] = values[j + 1];
+              values[j + 1] = temp;
 
-                swap = true;
-            }
-        }
+              swap = true;
+          }
+      }
 
-        //if there was no swaps then get out of loop
-        if( !swap ) {
-            return;
-        }
-    }
+      //if there was no swaps then get out of loop
+      if( !swap ) {
+          return;
+      }
+  }
 
-    return;
+  return;
 }
